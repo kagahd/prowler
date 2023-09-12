@@ -1,0 +1,32 @@
+{
+  "Provider": "aws",
+  "CheckID": "iam_role_permissive_trust_relationship",
+  "CheckTitle": "Ensure IAM Roles do not allow assume role from any role of a cross account",
+  "CheckType": [],
+  "ServiceName": "iam",
+  "SubServiceName": "",
+  "ResourceIdTemplate": "arn:partition:service:region:account-id:resource-id",
+  "Severity": "high",
+  "ResourceType": "AwsIamRole",
+  "Description": "Ensure IAM Roles do not allow assume role from any role of a cross account",
+  "Risk": "If an IAM role allows assume role from any role of a cross account, it can lead to privilege escalation.",
+  "RelatedUrl": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts",
+  "Remediation": {
+    "Code": {
+      "CLI": "",
+      "NativeIaC": "",
+      "Other": "",
+      "Terraform": ""
+    },
+    "Recommendation": {
+      "Text": "Ensure IAM Roles do not allow assume role from any role of a cross account but only from specific roles of specific accounts.",
+      "Url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-roles"
+    }
+  },
+  "Categories": [
+    "trustboundaries"
+  ],
+  "DependsOn": [],
+  "RelatedTo": [],
+  "Notes": "CAF Security Epic: IAM"
+}
