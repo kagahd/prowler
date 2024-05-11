@@ -127,18 +127,7 @@ class EC2(AWSService):
                         is_resource_filtered(arn, self.audit_resources)
                     ):
                         associated_sgs = []
-                        # check if sg has public access to all ports
-                        all_public_ports = False
                         for ingress_rule in sg["IpPermissions"]:
-                            if (
-                                check_security_group(
-                                    ingress_rule, "-1", any_address=True
-                                )
-                                and "ec2_securitygroup_allow_ingress_from_internet_to_all_ports"
-                                in self.audited_checks
-                            ):
-                                all_public_ports = True
-                            # check associated security groups
                             for sg_group in ingress_rule.get("UserIdGroupPairs", []):
                                 if sg_group.get("GroupId"):
                                     associated_sgs.append(sg_group["GroupId"])
@@ -150,7 +139,6 @@ class EC2(AWSService):
                                 id=sg["GroupId"],
                                 ingress_rules=sg["IpPermissions"],
                                 egress_rules=sg["IpPermissionsEgress"],
-                                public_ports=all_public_ports,
                                 associated_sgs=associated_sgs,
                                 vpc_id=sg["VpcId"],
                                 tags=sg.get("Tags"),
@@ -538,7 +526,6 @@ class SecurityGroup(BaseModel):
     region: str
     id: str
     vpc_id: str
-    public_ports: bool
     associated_sgs: list
     network_interfaces: list[NetworkInterface] = []
     ingress_rules: list[dict]
