@@ -26,6 +26,10 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}
 
+      - name: Overwrite any_changed to true
+        id: are-non-ignored-files-changed
+        run: echo "any_changed=true" >> $GITHUB_OUTPUT
+
 #      - name: Test if changes are in not ignored paths
 #        id: are-non-ignored-files-changed
 #        uses: tj-actions/changed-files@v45
