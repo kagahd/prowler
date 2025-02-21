@@ -23,6 +23,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
 
 #      - name: Test if changes are in not ignored paths
 #        id: are-non-ignored-files-changed
