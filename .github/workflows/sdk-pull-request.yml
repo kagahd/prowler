@@ -24,22 +24,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Test if changes are in not ignored paths
-        id: are-non-ignored-files-changed
-        uses: tj-actions/changed-files@v45
-        with:
-          files: ./**
-          files_ignore: |
-            .github/**
-            docs/**
-            permissions/**
-            api/**
-            ui/**
-            README.md
-            mkdocs.yml
-            .backportrc.json
-            .env
-            docker-compose*
+#      - name: Test if changes are in not ignored paths
+#        id: are-non-ignored-files-changed
+#        uses: tj-actions/changed-files@v45
+#        with:
+#          files: ./**
+#          files_ignore: |
+#            .github/**
+#            docs/**
+#            permissions/**
+#            api/**
+#            ui/**
+#            README.md
+#            mkdocs.yml
+#            .backportrc.json
+#            .env
+#            docker-compose*
 
       - name: Install poetry
         if: steps.are-non-ignored-files-changed.outputs.any_changed == 'true'
